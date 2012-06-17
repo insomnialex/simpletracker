@@ -12,6 +12,7 @@
       {      
       font-size:1.2em;
       color:white;
+      list-style-type: none;
       }
     .heading
       {
@@ -40,7 +41,7 @@
         {
         text += CreateSection(key, data[key])
         }
-      document.getElementsByTagName("body")[0].innerHTML = text
+      document.getElementById("main").innerHTML = text
       }
     function CreateSection(section, dataList)
       {
@@ -79,5 +80,6 @@
     </script>
   </head>
   <body onload="DisplayData()">  
+  <div id="main"></div>    
   </body>
 </html>
