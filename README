@@ -1,2 +1,6 @@
 Track things.
 That's what this web app will let you do.
+
+/        - main, serves index.html; displays data
+/edit    - simple page to alter the redis database
+/command - accepts arguments to alter the redis database 
