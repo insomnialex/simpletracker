@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Item Tracker</title>
+    <style type="text/css">
+    body
+      {
+      background-color:black;
+      }
+    li
+      {      
+      font-size:1.2em;
+      color:white;
+      }
+    .heading
+      {
+      width:100%;
+      text-align:center;
+      font-size:3em;
+      border-style:solid;
+      border-width:0px;
+      border-radius:10px;
+      background-color:gray;
+      color:white;
+      margin:2px;
+      cursor:pointer;
+      }
+    .hidden
+      {
+      display:none;
+      }
+    </style>
+    <script>
+    data = {{ args }}
+    function DisplayData()
+      {
+      var text = ""
+      for(var key in data)
+        {
+        text += CreateSection(key, data[key])
+        }
+      document.getElementsByTagName("body")[0].innerHTML = text
+      }
+    function CreateSection(section, dataList)
+      {
+      var text = '<div id="'+section+'" onclick="DisplaySection()" class="heading">'+section+'</div>'
+      text += '<ul id="'+section+'List" class="hidden">'
+      var sorted = dataList.sort()
+      for(var index in dataList)
+        {
+        text += '<li onclick="WikiLink()">'+decodeURI(dataList[index])+'</li>'
+        }
+      return text + '</ul>'
+      }
+    function DisplaySection()
+      {
+      var hideCallingElement = false
+      var id = event.srcElement.id+"List"
+      var callingElement = document.getElementById(id)
+      //if the element is already showing, hide on click
+      if(callingElement.className != "hidden")
+        hideCallingElement = true
+      var lists = document.getElementsByTagName('ul')
+      for(var index in lists)
+        {
+        lists[index].className = "hidden"          
+        }      
+      if(!hideCallingElement)
+        callingElement.className = ""
+      } 
+    function WikiLink()
+      {
+      var url = "http://en.wikipedia.org/wiki/"
+      url += event.srcElement.innerHTML.replace(' ', '_')
+      //url += "_(film)"
+      window.open(url)
+      }
+    </script>
+  </head>
+  <body onload="DisplayData()">  
+  </body>
+</html>

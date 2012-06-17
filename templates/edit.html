@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Item Tracker - EDIT</title>
+    <script>
+    function Submit()
+      {
+      var req = new XMLHttpRequest()
+      var url = 'command?'
+      url += 'item='+document.getElementById("item").value
+      url += '&sec='+document.getElementById("sec").value
+      var add = document.getElementById("add").checked      
+      if(add)
+        url += '&cmd=add_item'
+      else
+        url += '&cmd=remove_item'
+      req.open("GET", url, false)
+      req.send()
+      document.getElementById("response").innerHTML = req.responseText
+      document.getElementById("item").value = ""
+      }
+    </script>
+  </head>
+  <body>
+  <input type="radio" id="add" name="cmd" checked="checked"/>add
+  <input type="radio" name="cmd"/>remove
+  <br>
+  section:<input id="sec" type="text"><br>
+  item:<input id="item" type="text"><br>
+  <button onclick="Submit()">submit</button><br>
+  response:<span id="response"></span>
+  </body>
+</html>
